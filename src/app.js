@@ -2,6 +2,12 @@ const express = require("express")
 
 const app = express();
 
+app.use("/hellloo",(req,res)=>{
+    res.send("hello world")
+})
+
+
+//http methods
 app.get("/", (req,res)=>{
      res.send("hello from server")
 })
