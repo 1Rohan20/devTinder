@@ -4,6 +4,8 @@ const app = express();
 //we can set as many route handler as we want to 
 //we can also wrap them in an array 
 //doest make any difference
+//all of it works with call stack in the picture so errors amy come if we arent carefull
+
 
 app.use("/",(req,res,next)=>{
     console.log("handler 1")
