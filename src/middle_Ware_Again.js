@@ -34,6 +34,8 @@ app.use(
 
     //if we add a next() in the last handler then we get an error on postman as Express is expecting another route handler
 
+    //we can wrap the route handler functions into an array wont effect the actual output or the working of the code
+
 
     // app.get("/exam",(req,res,next)=>{
     //     // next()
