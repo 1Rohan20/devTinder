@@ -16,10 +16,28 @@ app.use(
         next()                        //adding next() makes sure that our request is forwarded to the next route handler if we havent responded back
         //    res.send("heolo")       //if we write here then we get error if the nexthandler is responding back
     },
-    (req, res) => {
+    (req, res,next) => {
         console.log("handling route 2")
-        res.send("route handler 2")
+        next()
+        // res.send("route handler 2")
+    },
+    (req, res,next) => {
+        console.log("handling route 3")
+        next()
+        // res.send("route handler 3")
+    },
+    (req, res,next) => {
+        console.log("handling route 4")
+        // res.send("route handler 4")
+        // next()
     })
+
+    //if we add a next() in the last handler then we get an error on postman as Express is expecting another route handler
+
+
+    // app.get("/exam",(req,res,next)=>{
+    //     // next()
+    // })
 
 app.listen(3000, () => {
     console.log("server up and running")
