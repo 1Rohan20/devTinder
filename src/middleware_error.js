@@ -7,24 +7,37 @@ const app = express();
 //all of it works with call stack in the picture so errors amy come if we arent carefull
 
 
-app.use("/",(req,res,next)=>{
+// app.use("/",(req,res,next)=>{
+//     console.log("handler 1")
+//     next()
+//     // res.send("Route handler 1")  //if we dont do res.send() then an infinite loop happens
+//     // next()
+// },(req,res,next)=>{
+//     console.log("handler 2")
+//     next()
+//     // res.send("route handler 2")   //in this case route handler  1 will be printed
+// },(req,res,next)=>{
+//     console.log("handler 3")
+//     next();
+// },(req,res,next)=>{
+//     console.log("handler 4")
+//     next();
+// },(req,res,next)=>{
+//     console.log("handler 5")
+//     res.send("5th handler")
+// })
+
+
+app.get("/use",(req,res,next)=>{
     console.log("handler 1")
     next()
-    // res.send("Route handler 1")  //if we dont do res.send() then an infinite loop happens
-    // next()
-},(req,res,next)=>{
+    // res.send("handler 1") gives error becuase of call stack
+})
+
+app.get("/use",(req,res,next)=>{
     console.log("handler 2")
-    next()
-    // res.send("route handler 2")   //in this case route handler  1 will be printed
-},(req,res,next)=>{
-    console.log("handler 3")
     next();
-},(req,res,next)=>{
-    console.log("handler 4")
-    next();
-},(req,res,next)=>{
-    console.log("handler 5")
-    res.send("5th handler")
+    res.send("handler 2")
 })
 
 //but if we pass "next" argument in the first handler then we might be able to see route handler 2 . But it depends on the position of next
