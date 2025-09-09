@@ -18,12 +18,41 @@ const User = require("./models/user")
   //  }) //creating new instance of a User model
 
    const user = new User(req.body) // here we are getting value from postman
-  await user.save()  //returns a promise
+   await user.save()  //returns a promise
   // a new document is added into the  user collection presemt in devTinder database
     res.send("user added succesfully") // if we dont send a response back infinte loop begins
 })  
 //👉 form values → JSON request → Express parses → MongoDB stores → response returns.
 //https://chatgpt.com/share/68c02508-67c8-8012-91e6-2d0e071bbdcd  read this chat 
+
+
+//api to fetch people from database using their email id will be a get request because we want the data
+
+app.get("/userFromEmail", async (req,res)=>{
+    const userEmail = req.body.emailId   //gets email id from Postman body (request body could be a form or anything else here we are testing using psotman)
+     try{
+      const user = await User.find({emailId : userEmail})
+      if(user.length===0){
+        res.send("user not found")
+      }else{
+        res.send(user)
+      }
+    } catch(err){
+      res.status(400).send("something went wrong")
+     }
+    
+})
+
+app.get("/feed",async(req,res)=>{
+  try{
+    const allUsers = await User.find({})
+    res.send(allUsers)
+  } catch(err){
+     res.status(400).send("something went wrong")
+  }
+})
+
+
 
 
 
