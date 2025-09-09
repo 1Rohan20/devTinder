@@ -23,7 +23,7 @@ const User = require("./models/user")
     res.send("user added succesfully") // if we dont send a response back infinte loop begins
 })  
 //👉 form values → JSON request → Express parses → MongoDB stores → response returns.
-
+//https://chatgpt.com/share/68c02508-67c8-8012-91e6-2d0e071bbdcd  read this chat 
 
 
 
@@ -36,7 +36,7 @@ connectDB().then(()=>{
      console.error("database connection failed")
 })
 
-//https://chatgpt.com/share/68c02508-67c8-8012-91e6-2d0e071bbdcd  read this chat 
+
 
 
 
