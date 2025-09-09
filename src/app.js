@@ -1,7 +1,7 @@
 const express = require("express")
 const connectDB = require("./config/database")
 const app = express();
-
+const User = require("./models/user")
 connectDB().then(()=>{
      console.log("database connected ")
      app.listen(3000,()=>{  //connect db first and then start server
@@ -13,14 +13,18 @@ connectDB().then(()=>{
 
 
 
+//api to add user in database
+app.post("/signup", async (req,res)=>{
 
-
-
-
-
-
-
-
+    const user = new User({
+     firstName : "Aman",
+     lastName : "Gupta",
+     emailId : "gupta.aman@gmail.com",
+     password : "Aman@123"
+   }) //creating new instance of a User model
+  await user.save()  //returns a promise
+    res.send("user added succesfully") // if we dont send a response back infinte loop begins
+})
 
 
 
