@@ -58,6 +58,25 @@ app.get("/byId", async(req,res)=>{
   res.send(userId)
 })
 
+app.delete("/deleteUser",async (req,res)=>{
+  const id = req.body._id
+
+  try{
+  const user  = await User.findOneAndDelete({ _id: id })
+  //    const user  = await User.findOneAndDelete(id)  also works
+   console.log(user)
+    if(!user){
+      res.send("user not found")
+    }else{
+
+      res.send("user deleted")
+    }
+  }
+  catch(err){
+     res.status(400).send("something went wrong")
+  }
+})
+
 
 
 connectDB().then(()=>{
