@@ -58,6 +58,8 @@ app.get("/byId", async(req,res)=>{
   res.send(userId)
 })
 
+
+//delete user api
 app.delete("/deleteUser",async (req,res)=>{
   const id = req.body._id
 
@@ -77,6 +79,27 @@ app.delete("/deleteUser",async (req,res)=>{
   }
 })
 
+
+//update data of user
+
+app.patch("/updateDetails",async (req,res)=>{
+  const data  = req.body.firstName
+  const id = req.body._id
+
+  try{
+     await User.findByIdAndUpdate({_id:id},data)
+    if(!id){
+      res.send("user not found")
+    }
+    else{
+      res.send("user updated")
+    }
+    // await newName.save()
+  }
+  catch(err){
+    res.status(400).send("something went wrong")
+  }
+})
 
 
 connectDB().then(()=>{
