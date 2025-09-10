@@ -52,7 +52,11 @@ app.get("/feed",async(req,res)=>{
   }
 })
 
-
+app.get("/byId", async(req,res)=>{
+  const id = req.body.id
+  const userId = await User.findById(id)
+  res.send(userId)
+})
 
 
 
