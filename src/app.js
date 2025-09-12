@@ -9,7 +9,7 @@ const User = require("./models/user")
 
 //api to add user in database
   app.post("/signup", async (req,res)=>{
-    console.log(req.body)
+    // console.log(req.body)
   //   const user = new User({
   //    firstName : "Aman",    //here we are hard coding the value
   //    lastName : "Gupta",
@@ -17,10 +17,28 @@ const User = require("./models/user")
   //    password : "Aman@123"
   //  }) //creating new instance of a User model
 
-   const user = new User(req.body) // here we are getting value from postman
-   await user.save()  //returns a promise
+   const user = new User(req.body)
+  //  try{
+  //   await user.save()  //returns a promise
+  //   res.send("user added succesfully") // if we dont send a response back infinte loop begins
+  //  }catch(err){
+  //   res.status(400).send("something wne twornh")
+  //  }
+   // here we are getting value from postman
+        
+   try {
+  await user.save();
+  res.send("user added successfully");
+} catch (err) {
+  if (err.code === 11000) {
+    res.status(400).send("Email already exists");
+  } else {
+    res.status(400).send("Something went wrong");
+  }
+}
+
   // a new document is added into the  user collection presemt in devTinder database
-    res.send("user added succesfully") // if we dont send a response back infinte loop begins
+   
 })  
 //👉 form values → JSON request → Express parses → MongoDB stores → response returns.
 //https://chatgpt.com/share/68c02508-67c8-8012-91e6-2d0e071bbdcd  read this chat 
